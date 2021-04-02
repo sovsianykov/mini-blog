@@ -10,20 +10,28 @@ import {useState} from "react";
 
 const NewArticle = () => {
     const [title, setTitle] = useState("");
-    const [body, setBody] = useState("");
+    const [content, setContent] = useState("");
 
-    const onHandleChange = (e) => {
-        setBody(e)
+    const onChangeArticleContent = (e) => {
+        setContent(e)
     };
     const onHandleSubmit = (e) => {
         e.preventDefault();
-        const post = {
+
+        const article = {
             title: title,
-            body: body,
+            content: content,
+            createDate: new Date(),
+            imageSrc : 'https://i.pinimg.com/564x/82/52/ea/8252ea04b73f30f392da448124dca858.jpg',
+            isPublish : false,
+            createUserID : 'Sangit'
+
+
         };
+        console.log(article)
         // firebase.database().ref("/posts").push(post);
         setTitle("");
-        setBody("");
+        setContent("");
     };
 
 
@@ -50,14 +58,14 @@ const NewArticle = () => {
                                 </div>
                                 <div className="form-group">
                                     <ReactQuill
-                                        value={body}
+                                        value={content}
                                         modules={NewArticle.modules}
                                         formats={NewArticle.formats}
-                                        placeholder="Body"
-                                        onChange={onHandleChange}
+                                        placeholder="content"
+                                        onChange={e =>onChangeArticleContent(e)}
                                     />
                                 </div>
-                                <Button className="btn" onClick={onHandleSubmit}>
+                                <Button variant='contained' className="btn-danger" onClick={e =>onHandleSubmit(e)}>
                                     Post
                                 </Button>
                             </form>
