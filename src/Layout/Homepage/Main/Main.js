@@ -13,7 +13,7 @@ const Main =() => {
          getMyArticles()
         console.log(articles)
         console.log(db.collection('Article'))
-    },[firebase.firestore])
+    },[articles, isLoaded])
     const getMyArticles =() => {
        db
            .collection('Article')
