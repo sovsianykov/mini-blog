@@ -13,7 +13,7 @@ const Main =() => {
          getMyArticles()
         console.log(articles)
         console.log(db.collection('Article'))
-    },[firebase.firestore])
+    },[isLoaded])
     const getMyArticles =() => {
        db
            .collection('Article')
@@ -41,7 +41,7 @@ const Main =() => {
           <div className="toolbar">
               toolbar
           </div>
-            <Grid container justify='center'>
+            <Grid container justify='center' spacing={2}>
                 { isLoaded ? articles.map((article,i) =>(
                     <Grid item xs={12} sm={3} md={3} key={i}>
                         <ArticleCard data = {article}/>
