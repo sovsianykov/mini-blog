@@ -15,11 +15,15 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import img1 from './../../assests/archtopbg.JPG'
+import { Link } from "react-router-dom";
+import img1 from './../../assests/archtopbg.JPG';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100% '
+        width: '100% ',
+        textDecoration: "none"
+
     },
     media: {
         height: 0,
@@ -39,21 +43,28 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: red[500],
     },
 }));
-
+export const timeStampToString = (ts) => {
+     const  date = new Date(ts *1000)
+    return date.getFullYear() + '/'+  (date.getMonth() + 1) + '/' + date.getDay()
+}
 export default function ArticleCard({data}) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
+
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} component={Link} to ={{
+            pathname : 'article/' +data.id,
+            state : data
+        }} >
             <CardHeader
                 avatar={
                     <Avatar aria-label="recipe" className={classes.avatar}>
-                        ST
+                        SO
                     </Avatar>
                 }
                 action={
@@ -61,19 +72,17 @@ export default function ArticleCard({data}) {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title={data.categoryLabel}
+                title={data.title}
+                subheader={timeStampToString(data.createDate.seconds)}
             />
             <CardMedia
                 className={classes.media}
                 image={img1}
+                title={data.title}
             />
-
             <CardContent>
-                <Typography variant='h6' color='textPrimary' align='center'>
-                    {data.title}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    {data.content}
+                <Typography variant="h5" color="textSecondary" component="h5" align='center'>
+                    {data.categoryLabel}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -94,10 +103,6 @@ export default function ArticleCard({data}) {
                     <ExpandMoreIcon />
                 </IconButton>
             </CardActions>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-                 <CardContent>
-                </CardContent>
-            </Collapse>
         </Card>
     );
 }
