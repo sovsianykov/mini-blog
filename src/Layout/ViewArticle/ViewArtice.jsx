@@ -18,14 +18,11 @@ const ViewArticle = (props) => {
 
     useEffect(()=>{
 
-        if ( (typeof props.location.state !== undefined) {
-            if (props.location.state.hasOwnProperty('content')) {
-                setArticle(props.location.state);
-                setIsLoaded(true)
-            }
+        if (  props.location.state !== undefined) {
+            setArticle(props.location.state);
+            setIsLoaded(true)
         }
-
-    },[props.location.state])
+    },[])
 
 
      const timeStampToString = (ts) => {
