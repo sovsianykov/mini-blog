@@ -1,10 +1,10 @@
 
 import * as React from 'react';
-import {Box, Paper, Typography, Grid, CardMedia} from "@material-ui/core";
+import {Box, Paper, Typography, Grid} from "@material-ui/core";
 import useStyles from '../styles'
 import { withRouter } from 'react-router-dom'
 import parse from 'html-react-parser'
-import {useEffect, useState, useRef} from "react";
+import {useEffect, useState} from "react";
 
 export const timeStampToString = (ts) => {
     const  date = new Date(ts *1000)
@@ -22,7 +22,7 @@ const ViewArticle = (props) => {
             setArticle(props.location.state);
             setIsLoaded(true)
         }
-    },[])
+    },[props.location.state])
 
 
      const timeStampToString = (ts) => {

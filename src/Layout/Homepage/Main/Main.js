@@ -30,11 +30,9 @@ const Main = () => {
     }
   useEffect(() => {
     getMyArticles();
-    console.log(articles);
-    console.log(db.collection("Article"));
-  }, [ isLoaded ]);
+  }, [ isLoaded  ]);
 
-;
+
   return (
     <div>
       <div className="toolbar">toolbar</div>

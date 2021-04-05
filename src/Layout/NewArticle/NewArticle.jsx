@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import {Box, Paper, Typography,Grid, Button} from "@material-ui/core";
+import {Box, Paper, Typography, Grid, Button, Card, CardContent, FormControl,FormHelperText,MenuItem,Select,InputLabel } from "@material-ui/core";
 import useStyles from '../styles'
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
@@ -8,22 +8,35 @@ import {useState} from "react";
 
 
 
+
 const NewArticle = () => {
     const [title, setTitle] = useState("");
-    const [body, setBody] = useState("");
+    const [content, setContent] = useState("");
+    const [ispublished, setIspublished] = useState(false);
 
-    const onHandleChange = (e) => {
-        setBody(e)
+    const onChangeArticleContent = (e) => {
+        setContent(e)
     };
+    const onTrue = (e) => {
+        setIspublished(e.target.value)
+    }
+
     const onHandleSubmit = (e) => {
         e.preventDefault();
-        const post = {
+
+        const article = {
             title: title,
-            body: body,
+            content: content,
+            createDate: new Date(),
+            imageSrc : 'https://i.pinimg.com/564x/82/52/ea/8252ea04b73f30f392da448124dca858.jpg',
+            isPublish : ispublished,
+            createUserID : 'Sangit'
+
+
         };
-        // firebase.database().ref("/posts").push(post);
+        console.log(article)
         setTitle("");
-        setBody("");
+        setContent("");
     };
 
 
@@ -31,9 +44,10 @@ const NewArticle = () => {
     return (
         <Box>
             <main className={classes.root}>
-                <Grid container justify="center">
-                    <Grid item xs={12} sm={11} md={11}>
-                        <Paper className={classes.paper}>
+                <Paper className={classes.paper}>
+                <Grid container justify="space-around">
+                    <Grid item xs={12} sm={9} md={9}>
+
                             <Typography variant="h4" className={classes.title}>
                                 New Article
                             </Typography>
@@ -45,25 +59,54 @@ const NewArticle = () => {
                                         name="title"
                                         placeholder="Title"
                                         onChange={ e=>{setTitle(e.target.value)}}
-                                        className="form-control"
+                                        className= {classes.input}
                                     />
                                 </div>
-                                <div className="form-group">
+                                <div >
                                     <ReactQuill
-                                        value={body}
+                                        value={content}
                                         modules={NewArticle.modules}
                                         formats={NewArticle.formats}
-                                        placeholder="Body"
-                                        onChange={onHandleChange}
+                                        placeholder="content"
+                                        onChange={e =>onChangeArticleContent(e)}
                                     />
                                 </div>
-                                <Button className="btn" onClick={onHandleSubmit}>
-                                    Post
-                                </Button>
+
                             </form>
-                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm={2} md={2} >
+                        <Card className={classes.settings}>
+                            <CardContent>
+                               <Typography variant="h5" className={classes.title}>
+                                   Article settings
+                               </Typography>
+                                <FormControl >
+                                    <InputLabel shrink id="demo-simple-select-placeholder-label-label">
+                                        Publish
+                                    </InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-placeholder-label-label"
+                                        id="demo-simple-select-placeholder-label"
+                                        // value={age}
+                                        onChange={onTrue}
+                                        displayEmpty
+
+                                    >
+                                        <MenuItem onChange={onTrue} value={false}>False</MenuItem>
+                                        <MenuItem onChange={onTrue} value={true}>True</MenuItem>
+                                    </Select>
+                                    <FormHelperText>Published status</FormHelperText>
+                                </FormControl>
+                                <Button variant='contained'
+                                        className={classes.btn} color='secondary'
+                                        onClick={e =>onHandleSubmit(e)}>
+                                    Submit
+                                </Button>
+                            </CardContent>
+                        </Card>
                     </Grid>
                 </Grid>
+                </Paper>
 
             </main>
         </Box>
