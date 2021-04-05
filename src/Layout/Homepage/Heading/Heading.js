@@ -45,7 +45,7 @@ export default function Heading() {
                     </Typography>
 
                     <Button  component={Link} to='/new-article' color="inherit">New Articles</Button>
-                    <Button color="inherit" >Login</Button>
+                    <Button  component={Link} to='/login-page' color="inherit" >Login</Button>
                     <Button color="inherit">Logout</Button>
 
                 </Toolbar>
