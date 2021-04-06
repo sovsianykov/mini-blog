@@ -33,7 +33,7 @@ const NewArticle = () => {
             createUserID : 'Sangit'
         };
         console.log(article)
-       db.collection("Article").doc("sg").set({
+       db.collection("Article").doc(`${title}`).set({
            title: title,
            content: content,
            createDate: new Date(),
