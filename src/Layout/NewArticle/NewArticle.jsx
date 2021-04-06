@@ -5,8 +5,8 @@ import useStyles from '../styles'
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import {useState} from "react";
-
-
+import firebase from "../../Config/firebase";
+import { db } from '../../Config/firebase'
 
 
 const NewArticle = () => {
@@ -31,12 +31,23 @@ const NewArticle = () => {
             imageSrc : 'https://i.pinimg.com/564x/82/52/ea/8252ea04b73f30f392da448124dca858.jpg',
             isPublish : ispublished,
             createUserID : 'Sangit'
-
-
         };
         console.log(article)
-        setTitle("");
-        setContent("");
+       db.collection("Article").doc("sg").set({
+           title: title,
+           content: content,
+           createDate: new Date(),
+           imageSrc : 'https://i.pinimg.com/564x/82/52/ea/8252ea04b73f30f392da448124dca858.jpg',
+           isPublish : ispublished,
+           createUserID : 'Sangit'
+
+        })
+            .then(() => {
+                console.log("Document successfully written!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
     };
 
 
@@ -82,19 +93,17 @@ const NewArticle = () => {
                                </Typography>
                                 <FormControl >
                                     <InputLabel shrink id="demo-simple-select-placeholder-label-label">
-                                        Publish
+
                                     </InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-placeholder-label-label"
-                                        id="demo-simple-select-placeholder-label"
+                                    <select
+
                                         // value={age}
                                         onChange={onTrue}
-                                        displayEmpty
 
                                     >
-                                        <MenuItem onChange={onTrue} value={false}>False</MenuItem>
-                                        <MenuItem onChange={onTrue} value={true}>True</MenuItem>
-                                    </Select>
+                                        <option defaultValue={false}>False</option>
+                                        <option defaultValue={true}>True</option>
+                                    </select>
                                     <FormHelperText>Published status</FormHelperText>
                                 </FormControl>
                                 <Button variant='contained'

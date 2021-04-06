@@ -6,7 +6,7 @@ import Heading from "./Layout/Homepage/Heading/Heading";
 import ViewArticle from "./Layout/ViewArticle/ViewArtice";
 import NewArticle from "./Layout/NewArticle/NewArticle";
 import { Provider } from "react-redux";
-import { getReduxStore, getAuthProps } from "./Config/firebase-redux";
+import { getReduxStore, getRrfProps } from "./Config/firebase-redux";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import LoginPage from "./Layout/LoginPage]/LoginPage";
 
@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <Provider store={getReduxStore()}>
-        <ReactReduxFirebaseProvider {...getAuthProps()}>
+        <ReactReduxFirebaseProvider {...getRrfProps()}>
           <Router>
             <Heading />
             <Switch>

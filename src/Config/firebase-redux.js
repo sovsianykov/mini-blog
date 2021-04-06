@@ -21,6 +21,6 @@ const authProps = {
 export function getReduxStore() {
     return store
 }
-export function getAuthProps() {
+export function getRrfProps() {
     return authProps
 }

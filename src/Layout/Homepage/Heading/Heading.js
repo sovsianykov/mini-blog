@@ -8,6 +8,9 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from "react-router-dom";
+import {connect} from "react-redux";
+import 'firebase/auth';
+import firebase from "../../../Config/firebase";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Heading() {
+const Heading = (props) => {
     const classes = useStyles();
     // const [isopen, setIsopen] = useState(false)
     // // const toogle =() => {
@@ -43,13 +46,26 @@ export default function Heading() {
                     <Typography  component={Link} to='/' variant="h6" className={classes.title} color='inherit'>
                         Mini-blog
                     </Typography>
+                    {firebase.auth.displayName}
 
                     <Button  component={Link} to='/new-article' color="inherit">New Articles</Button>
                     <Button  component={Link} to='/login-page' color="inherit" >Login</Button>
-                    <Button color="inherit">Logout</Button>
-
+                    { props.auth.isEmpty ? <Button  component={Link} to='/login-page' color="inherit" >Login</Button> :
+                        <Button color="inherit"
+                         onClick={() => firebase.auth().signOut()}
+                        >Logout</Button>
+                    }
                 </Toolbar>
             </AppBar>
         </div>
     );
 }
+const enhance = connect(
+    // Map redux state to component props
+    ({ firebase: { auth, profile } }) => ({
+        auth,
+        profile
+    })
+)
+
+export default enhance(Heading)

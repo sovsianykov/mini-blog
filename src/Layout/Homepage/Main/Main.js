@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ArticleCard from "./../../../components/ArticeCard/ArticleCard";
-import firebase from "../../../Config/firbase";
+import firebase from "../../../Config/firebase";
 import "./style.scss";
 import { Grid } from "@material-ui/core";
 
