@@ -1,11 +1,11 @@
 
 import * as React from 'react';
-import {Box, Paper, Typography, Grid, Button, Card, CardContent, FormControl,FormHelperText,MenuItem,Select,InputLabel } from "@material-ui/core";
+import {Box, Paper, Typography, Grid, Button, Card, CardContent, FormControl,FormHelperText,InputLabel } from "@material-ui/core";
 import useStyles from '../styles'
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import {useState} from "react";
-import firebase from "../../Config/firebase";
+// import firebase from "../../Config/firebase";
 import { db } from '../../Config/firebase'
 
 
@@ -33,7 +33,7 @@ const NewArticle = () => {
             createUserID : 'Sangit'
         };
         console.log(article)
-       db.collection("Article").doc("sg").set({
+       db.collection("Article").doc().set({
            title: title,
            content: content,
            createDate: new Date(),

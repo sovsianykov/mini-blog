@@ -49,7 +49,7 @@ const Heading = (props) => {
                     {firebase.auth.displayName}
 
                     <Button  component={Link} to='/new-article' color="inherit">New Articles</Button>
-                    <Button  component={Link} to='/login-page' color="inherit" >Login</Button>
+                    {/*<Button  component={Link} to='/login-page' color="inherit" >Login</Button>*/}
                     { props.auth.isEmpty ? <Button  component={Link} to='/login-page' color="inherit" >Login</Button> :
                         <Button color="inherit"
                          onClick={() => firebase.auth().signOut()}
