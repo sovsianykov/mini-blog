@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <Provider store={getReduxStore()}>
-        <ReactReduxFirebaseProvider {...getRrfProps()}>
+        {/*<ReactReduxFirebaseProvider {...getRrfProps()}>*/}
           <Router>
             <Heading />
             <Switch>
@@ -32,7 +32,7 @@ function App() {
               </Route>
             </Switch>
           </Router>
-        </ReactReduxFirebaseProvider>
+        {/*</ReactReduxFirebaseProvider>*/}
       </Provider>
     </div>
   );
